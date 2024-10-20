@@ -32,3 +32,10 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
+// const items = [];
+// const filter = 'all';
+
+// function addItem(text) {
+//   items.push({...text, completed: false})
+// }
