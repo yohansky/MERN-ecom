@@ -74,10 +74,10 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-// const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema);
 
-// export default Product;
+export default Product;
 
 // Atau
 
-module.exports = mongoose.model("Product", productSchema);
+// module.exports = mongoose.model("Product", productSchema);
