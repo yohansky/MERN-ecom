@@ -77,7 +77,3 @@ const productSchema = new mongoose.Schema(
 const Product = mongoose.model("Product", productSchema);
 
 export default Product;
-
-// Atau
-
-// module.exports = mongoose.model("Product", productSchema);
