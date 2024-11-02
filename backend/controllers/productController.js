@@ -1,6 +1,5 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Product from "../models/productModels.js";
-import { router } from "../routes/productRoutes.js";
 
 // @desc    fetch all products
 const getProducts = asyncHandler(async (req, res) => {
