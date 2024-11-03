@@ -1,9 +1,28 @@
 import asyncHandler from "../middleware/asyncHandler.js";
-import Product from "../models/productModels.js";
+import User from "../models/user.js";
 
 // @desc    fetch all products
 const authUser = asyncHandler(async (req, res) => {
-  res.send("auth user");
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  //fungsi user disini merujuk pada models user yang sudah di inisiasi diatas
+  //di models user terdapat fungsi matchPassword
+  if (user && (await user.matchPassword(password))) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+    // res.json({
+
+    // })
+  } else {
+    res.status(401);
+    throw new Error("Invalid email or password");
+  }
 });
 
 const registerUser = asyncHandler(async (req, res) => {
