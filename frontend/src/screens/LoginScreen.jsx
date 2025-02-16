@@ -11,6 +11,11 @@ import Loader from "../components/Loader";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,7 +57,12 @@ const LoginScreen = () => {
         </Form.Group>
         <Form.Group controlId="password" className="my-3">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
+          <div className="d-flex">
+            <Form.Control type={showPassword ? "text" : "password"} placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}></Form.Control>
+            <Button variant="secondary" onClick={togglePassword} className="ms-2">
+              {showPassword ? "Hide" : "Show"}
+            </Button>
+          </div>
         </Form.Group>
 
         <Button type="submit" variant="primary" className="mt-2" disabled={isLoading}>
