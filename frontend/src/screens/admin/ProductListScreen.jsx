@@ -1,5 +1,5 @@
 import React from "react";
-import { FaTimes, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { Button, Col, Row, Table } from "react-bootstrap";
@@ -8,7 +8,7 @@ import { useCreateProductMutation, useGetProductsQuery } from "../../slices/prod
 import { toast } from "react-toastify";
 
 const ProductListScreen = () => {
-  const { data: products, isLoading, error } = useGetProductsQuery();
+  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
 
   const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation();
 
