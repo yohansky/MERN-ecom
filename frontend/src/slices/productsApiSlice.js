@@ -1,8 +1,8 @@
-import { PRODUCTS_URL, UPLOADS_URL } from "../constants";
-import { apiSlice } from "./apiSlice";
+import { PRODUCTS_URL, UPLOADS_URL } from '../constants';
+import { apiSlice } from './apiSlice';
 
 export const productApiSlice = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getProducts: builder.query({
       query: ({ keyword, pageNumber }) => ({
         url: PRODUCTS_URL,
@@ -12,10 +12,10 @@ export const productApiSlice = apiSlice.injectEndpoints({
         },
       }),
       keepUnusedDataFor: 5,
-      providesTags: ["Products"],
+      providesTags: ['Products'],
     }),
     getProductDetails: builder.query({
-      query: (productId) => ({
+      query: productId => ({
         url: `${PRODUCTS_URL}/${productId}`,
       }),
       keepUnusedDataFor: 5,
@@ -23,40 +23,55 @@ export const productApiSlice = apiSlice.injectEndpoints({
     createProduct: builder.mutation({
       query: () => ({
         url: PRODUCTS_URL,
-        method: "POST",
+        method: 'POST',
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ['Product'],
     }),
     updateProduct: builder.mutation({
-      query: (data) => ({
+      query: data => ({
         url: `${PRODUCTS_URL}/${data.productId}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
       }),
-      invalidatesTags: ["Products"],
+      invalidatesTags: ['Products'],
     }),
     uploadProductImage: builder.mutation({
-      query: (data) => ({
+      query: data => ({
         url: `${UPLOADS_URL}`,
-        method: "POST",
+        method: 'POST',
         body: data,
       }),
     }),
     deleteProduct: builder.mutation({
-      query: (productId) => ({
+      query: productId => ({
         url: `${PRODUCTS_URL}/${productId}`,
-        method: "DELETE",
+        method: 'DELETE',
       }),
     }),
     createReview: builder.mutation({
-      query: (data) => ({
+      query: data => ({
         url: `${PRODUCTS_URL}/${data.productId}/reviews`,
-        method: "POST",
+        method: 'POST',
         body: data,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ['Product'],
+    }),
+    getTopProducts: builder.query({
+      query: () => ({
+        url: `${PRODUCTS_URL}/top`,
+      }),
+      keepUnusedDataFor: 5,
     }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductDetailsQuery, useCreateProductMutation, useUpdateProductMutation, useUploadProductImageMutation, useDeleteProductMutation, useCreateReviewMutation } = productApiSlice;
+export const {
+  useGetProductsQuery,
+  useGetProductDetailsQuery,
+  useCreateProductMutation,
+  useUpdateProductMutation,
+  useUploadProductImageMutation,
+  useDeleteProductMutation,
+  useCreateReviewMutation,
+  useGetTopProductsQuery,
+} = productApiSlice;
